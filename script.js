@@ -2,6 +2,9 @@ function start() {
   let name = document.getElementById("name").value.trim();
   let phone = document.getElementById("phone").value.trim();
 
+  // 🔥 هذا السطر الجديد (حل المشكلة)
+  localStorage.removeItem("finished");
+
   // تحقق الاسم
   if (name === "" || name.length < 3) {
     alert("الاسم يجب ان يحتوي على الأقل 3 حروف");
