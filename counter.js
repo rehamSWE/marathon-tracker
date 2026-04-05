@@ -16,23 +16,24 @@ let directionChanges = 0;
 // تجاهل الحركات الصغيرة
 let noiseThreshold = 2;
 
-// حالة الزر
+// ➕ إضافة فقط
 let started = false;
 
-// ❌ شلنا تحويل finished من هنا (كان سبب المشكلة)
+// ✅ إذا خلص → يروح للشكر مباشرة
+if (localStorage.getItem("finished")) {
+  window.location.replace("thanks.html");
+}
 
-// إذا ما فيه بيانات → يرجع للبداية
+// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
 
-// 🔥 زر واحد يتحكم بكل شيء
+// ➕ هذا فقط الجديد
 function handleAction() {
   if (!started) {
     start();
     started = true;
-
-    // تغيير النص إلى "إنهاء"
     document.getElementById("actionBtn").innerText = "إنهاء";
   } else {
     finish();
@@ -73,22 +74,18 @@ function startCounting() {
 
     let now = Date.now();
 
-    // تجاهل الاهتزازات الصغيرة
     if (Math.abs(magnitude - lastMagnitude) < noiseThreshold) {
       return;
     }
 
-    // تتبع الاتجاه
     if ((acc.y > 0 && lastY <= 0) || (acc.y < 0 && lastY >= 0)) {
       directionChanges++;
     }
 
-    // كشف القمة
     if (magnitude > threshold && magnitude > lastMagnitude) {
       peakDetected = true;
     }
 
-    // حساب الخطوة
     if (
       peakDetected &&
       directionChanges >= 2 &&
@@ -130,10 +127,7 @@ function finish() {
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
 
-      // نخزن إنه خلص
       localStorage.setItem("finished", "true");
-
-      // نحذف البيانات فقط
       localStorage.removeItem("name");
       localStorage.removeItem("phone");
 
