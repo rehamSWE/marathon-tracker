@@ -19,10 +19,7 @@ let noiseThreshold = 2;
 // حالة الزر
 let started = false;
 
-// إذا خلص → يروح للشكر
-if (localStorage.getItem("finished")) {
-  window.location.replace("thanks.html");
-}
+// ❌ شلنا تحويل finished من هنا (كان سبب المشكلة)
 
 // إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
@@ -133,7 +130,10 @@ function finish() {
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
 
+      // نخزن إنه خلص
       localStorage.setItem("finished", "true");
+
+      // نحذف البيانات فقط
       localStorage.removeItem("name");
       localStorage.removeItem("phone");
 
