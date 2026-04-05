@@ -54,7 +54,7 @@ function requestPermission() {
         if (response === "granted") {
           startCounting();
         } else {
-          alert("لازم تسمحين بالحركة 😅");
+          alert("يجب السماح بالحركة  ");
         }
       })
       .catch(console.error);
@@ -106,7 +106,7 @@ function startCounting() {
 
 function finish() {
   if (steps < 5) {
-    alert("امشي شوي أول 😅");
+    alert("لا يمكن إنهاء المشاركة قبل تسجيل عدد كافٍ من الخطوات");
     return;
   }
 
@@ -134,6 +134,6 @@ function finish() {
       window.location.replace("thanks.html");
     })
     .catch(() => {
-      alert("صار خطأ في الإرسال ❌");
+      alert(" خطأ في الإرسال ❌");
     });
 }
