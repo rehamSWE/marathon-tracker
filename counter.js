@@ -7,10 +7,14 @@ let minStepInterval = 700;
 
 // تتبع الحركة
 let lastMagnitude = 0;
-let peakCount = 0;
+let peakDetected = false;
+
+// 👇 تتبع الاتجاه (مهم جدًا)
+let lastY = 0;
+let directionChanges = 0;
 
 // تجاهل الحركات الصغيرة جدًا
-let noiseThreshold = 1.5;
+let noiseThreshold = 2;
 
 if (!localStorage.getItem("name")) {
   window.location.href = "index.html";
@@ -50,25 +54,38 @@ function startCounting() {
 
     let now = Date.now();
 
-    // تجاهل الاهتزازات الصغيرة
+    // ❌ تجاهل الاهتزازات الصغيرة
     if (Math.abs(magnitude - lastMagnitude) < noiseThreshold) {
       return;
     }
 
-    // كشف القمة (Peak)
-    if (magnitude > threshold && magnitude > lastMagnitude) {
-      peakCount++;
+    // 👇 تتبع الاتجاه (فوق/تحت)
+    if ((acc.y > 0 && lastY <= 0) || (acc.y < 0 && lastY >= 0)) {
+      directionChanges++;
     }
 
-    // لازم قمتين عشان نحسب خطوة
-    if (peakCount >= 2 && now - lastStepTime > minStepInterval) {
+    // 👇 كشف القمة
+    if (magnitude > threshold && magnitude > lastMagnitude) {
+      peakDetected = true;
+    }
+
+    // 👇 نحسب خطوة فقط إذا:
+    if (
+      peakDetected &&
+      directionChanges >= 2 &&
+      now - lastStepTime > minStepInterval
+    ) {
       steps++;
       document.getElementById("steps").innerText = steps;
       lastStepTime = now;
-      peakCount = 0;
+
+      // إعادة التصفير
+      peakDetected = false;
+      directionChanges = 0;
     }
 
     lastMagnitude = magnitude;
+    lastY = acc.y;
   });
 }
 
