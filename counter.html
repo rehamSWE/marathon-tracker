@@ -18,5 +18,12 @@
     <button onclick="finish()">إنهاء</button>
 
     <script src="counter.js"></script>
+    <script>
+  // منع الرجوع
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    history.go(1);
+  };
+</script>
   </body>
 </html>

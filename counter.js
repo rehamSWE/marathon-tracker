@@ -113,7 +113,7 @@ function finish() {
       localStorage.clear();
 
       // ✅ هنا التعديل المهم
-      window.location.href = "thanks.html";
+      window.location.replace("thanks.html");
     })
     .catch(() => {
       alert("صار خطأ في الإرسال ❌");
