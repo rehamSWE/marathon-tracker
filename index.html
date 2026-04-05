@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ماراثون المشي</title>
+
+    <!-- ربط CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h2>🏃‍♂️ سجل وابدأ الماراثون</h2>
+
+    <input type="text" id="name" placeholder="الاسم" />
+    <input
+      type="tel"
+      id="phone"
+      placeholder="05xxxxxxxx"
+      maxlength="10"
+      oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+    />
+
+    <button onclick="start()">ابدأ</button>
+
+    <!-- ربط JS -->
+    <script src="script.js"></script>
+  </body>
+</html>
