@@ -16,16 +16,15 @@ let directionChanges = 0;
 // تجاهل الحركات الصغيرة
 let noiseThreshold = 2;
 
-// ✅ حماية: إذا ما فيه بيانات → يرجع للبداية
+// ✅ إذا خلص → يروح للشكر مباشرة
+if (localStorage.getItem("finished")) {
+  window.location.replace("thanks.html");
+}
+
+// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
-
-// ✅ منع الرجوع من داخل الصفحة
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-  history.pushState(null, null, location.href);
-};
 
 function start() {
   requestPermission();
@@ -55,7 +54,9 @@ function startCounting() {
     let acc = event.accelerationIncludingGravity;
     if (!acc) return;
 
-    let magnitude = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
+    let magnitude = Math.sqrt(
+      acc.x * acc.x + acc.y * acc.y + acc.z * acc.z
+    );
 
     let now = Date.now();
 
@@ -116,9 +117,12 @@ function finish() {
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
 
-      // 🔥 منع إعادة الاستخدام
+      // 🔥 نخلي finished بدون ما نحذفه
       localStorage.setItem("finished", "true");
-      localStorage.clear();
+
+      // نحذف فقط البيانات القديمة
+      localStorage.removeItem("name");
+      localStorage.removeItem("phone");
 
       // انتقال بدون رجوع
       window.location.replace("thanks.html");

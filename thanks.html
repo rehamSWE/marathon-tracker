@@ -13,12 +13,12 @@
       <p>تم تسجيل نتيجتك بنجاح 👏</p>
     </div>
 
-    <!-- 🔥 منع الرجوع -->
+    <!-- 🔥 التحكم بالوصول -->
     <script>
-      history.pushState(null, null, location.href);
-      window.onpopstate = function () {
-        history.pushState(null, null, location.href);
-      };
+      // إذا ما خلص المستخدم → ما يدخل الصفحة
+      if (!localStorage.getItem("finished")) {
+        window.location.replace("index.html");
+      }
     </script>
   </body>
 </html>

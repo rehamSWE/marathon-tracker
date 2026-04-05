@@ -26,13 +26,12 @@
     <!-- ربط JS -->
     <script src="script.js"></script>
 
-    <!-- 🔥 منع الرجوع -->
+    <!-- 🔥 التحكم بالرجوع -->
     <script>
-      // يمنع الرجوع بزر الباك
-      history.pushState(null, null, location.href);
-      window.onpopstate = function () {
-        history.pushState(null, null, location.href);
-      };
+      // إذا خلص المستخدم → ما يرجع للبداية
+      if (localStorage.getItem("finished")) {
+        window.location.replace("thanks.html");
+      }
     </script>
   </body>
 </html>
