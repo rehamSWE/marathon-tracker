@@ -12,6 +12,7 @@
     <h2>🏃‍♂️ سجل وابدأ الماراثون</h2>
 
     <input type="text" id="name" placeholder="الاسم" />
+
     <input
       type="tel"
       id="phone"
@@ -24,12 +25,14 @@
 
     <!-- ربط JS -->
     <script src="script.js"></script>
+
+    <!-- 🔥 منع الرجوع -->
     <script>
-  // منع الرجوع
-  history.pushState(null, null, location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
-</script>
+      // يمنع الرجوع بزر الباك
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.pushState(null, null, location.href);
+      };
+    </script>
   </body>
 </html>

@@ -1,7 +1,7 @@
 let steps = 0;
 let lastStepTime = 0;
 
-// حساسية الحركة (أقوى ضد الغش)
+// حساسية الحركة
 let threshold = 13;
 let minStepInterval = 700;
 
@@ -9,17 +9,23 @@ let minStepInterval = 700;
 let lastMagnitude = 0;
 let peakDetected = false;
 
-// 👇 تتبع الاتجاه (مهم جدًا)
+// تتبع الاتجاه
 let lastY = 0;
 let directionChanges = 0;
 
-// تجاهل الحركات الصغيرة جدًا
+// تجاهل الحركات الصغيرة
 let noiseThreshold = 2;
 
-// ✅ إذا ما فيه بيانات → يرجع للبداية
+// ✅ حماية: إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
-  window.location.href = "index.html";
+  window.location.replace("index.html");
 }
+
+// ✅ منع الرجوع من داخل الصفحة
+history.pushState(null, null, location.href);
+window.onpopstate = function () {
+  history.pushState(null, null, location.href);
+};
 
 function start() {
   requestPermission();
@@ -53,22 +59,22 @@ function startCounting() {
 
     let now = Date.now();
 
-    // ❌ تجاهل الاهتزازات الصغيرة
+    // تجاهل الاهتزازات الصغيرة
     if (Math.abs(magnitude - lastMagnitude) < noiseThreshold) {
       return;
     }
 
-    // 👇 تتبع الاتجاه (فوق/تحت)
+    // تتبع الاتجاه
     if ((acc.y > 0 && lastY <= 0) || (acc.y < 0 && lastY >= 0)) {
       directionChanges++;
     }
 
-    // 👇 كشف القمة
+    // كشف القمة
     if (magnitude > threshold && magnitude > lastMagnitude) {
       peakDetected = true;
     }
 
-    // 👇 نحسب خطوة فقط إذا:
+    // حساب الخطوة
     if (
       peakDetected &&
       directionChanges >= 2 &&
@@ -78,7 +84,6 @@ function startCounting() {
       document.getElementById("steps").innerText = steps;
       lastStepTime = now;
 
-      // إعادة التصفير
       peakDetected = false;
       directionChanges = 0;
     }
@@ -110,9 +115,12 @@ function finish() {
   )
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
+
+      // 🔥 منع إعادة الاستخدام
+      localStorage.setItem("finished", "true");
       localStorage.clear();
 
-      // ✅ هنا التعديل المهم
+      // انتقال بدون رجوع
       window.location.replace("thanks.html");
     })
     .catch(() => {

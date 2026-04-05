@@ -11,19 +11,20 @@
 
     <div id="steps">0</div>
 
-    <!-- 👇 زر البداية -->
+    <!-- زر البداية -->
     <button onclick="start()">ابدأ</button>
 
     <!-- زر الإنهاء -->
     <button onclick="finish()">إنهاء</button>
 
     <script src="counter.js"></script>
+
+    <!-- 🔥 منع الرجوع -->
     <script>
-  // منع الرجوع
-  history.pushState(null, null, location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
-</script>
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.pushState(null, null, location.href);
+      };
+    </script>
   </body>
 </html>

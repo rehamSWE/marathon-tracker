@@ -12,12 +12,13 @@
       <h1>✅ شكراً لمشاركتك</h1>
       <p>تم تسجيل نتيجتك بنجاح 👏</p>
     </div>
+
+    <!-- 🔥 منع الرجوع -->
     <script>
-  // منع الرجوع
-  history.pushState(null, null, location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
-</script>
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.pushState(null, null, location.href);
+      };
+    </script>
   </body>
 </html>
