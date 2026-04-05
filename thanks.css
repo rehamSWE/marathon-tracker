@@ -27,16 +27,3 @@ p {
   margin-bottom: 20px;
 }
 
-button {
-  padding: 10px 20px;
-  border: none;
-  background: #4caf50;
-  color: white;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #45a049;
-}
