@@ -17,7 +17,7 @@ let directionChanges = 0;
 let noiseThreshold = 2;
 
 if (!localStorage.getItem("name")) {
-  window.location.href = "index.html";
+  window.location.href = "thanks.html";
 }
 
 function start() {
@@ -48,9 +48,7 @@ function startCounting() {
     let acc = event.accelerationIncludingGravity;
     if (!acc) return;
 
-    let magnitude = Math.sqrt(
-      acc.x * acc.x + acc.y * acc.y + acc.z * acc.z
-    );
+    let magnitude = Math.sqrt(acc.x * acc.x + acc.y * acc.y + acc.z * acc.z);
 
     let now = Date.now();
 
@@ -107,7 +105,7 @@ function finish() {
         phone: phone,
         steps: steps,
       }),
-    }
+    },
   )
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
