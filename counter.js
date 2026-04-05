@@ -1,25 +1,25 @@
 let steps = 0;
 let lastStepTime = 0;
 
-// حساسية الحركة
-let threshold = 12; // ارفعناها عشان يقلل التخبيص
-let minStepInterval = 600; // أقل وقت بين الخطوات (مللي ثانية)
+// حساسية الحركة (أقوى ضد الغش)
+let threshold = 13;
+let minStepInterval = 700;
 
-// للتأكد من "قمة" الحركة (مو أي اهتزاز)
+// تتبع الحركة
 let lastMagnitude = 0;
-let isPeak = false;
+let peakCount = 0;
 
-// تأكد فيه بيانات
+// تجاهل الحركات الصغيرة جدًا
+let noiseThreshold = 1.5;
+
 if (!localStorage.getItem("name")) {
   window.location.href = "index.html";
 }
 
-// زر البداية
 function start() {
   requestPermission();
 }
 
-// طلب إذن الحركة (iPhone)
 function requestPermission() {
   if (
     typeof DeviceMotionEvent !== "undefined" &&
@@ -39,7 +39,6 @@ function requestPermission() {
   }
 }
 
-// بدء العد (نسخة محسنة 🔥)
 function startCounting() {
   window.addEventListener("devicemotion", function (event) {
     let acc = event.accelerationIncludingGravity;
@@ -51,26 +50,28 @@ function startCounting() {
 
     let now = Date.now();
 
-    // 👇 فكرة القمة (Peak detection)
-    if (magnitude > threshold && magnitude > lastMagnitude) {
-      isPeak = true;
+    // تجاهل الاهتزازات الصغيرة
+    if (Math.abs(magnitude - lastMagnitude) < noiseThreshold) {
+      return;
     }
 
-    // لما ينزل بعد القمة → نحسب خطوة
-    if (isPeak && magnitude < lastMagnitude) {
-      if (now - lastStepTime > minStepInterval) {
-        steps++;
-        document.getElementById("steps").innerText = steps;
-        lastStepTime = now;
-      }
-      isPeak = false;
+    // كشف القمة (Peak)
+    if (magnitude > threshold && magnitude > lastMagnitude) {
+      peakCount++;
+    }
+
+    // لازم قمتين عشان نحسب خطوة
+    if (peakCount >= 2 && now - lastStepTime > minStepInterval) {
+      steps++;
+      document.getElementById("steps").innerText = steps;
+      lastStepTime = now;
+      peakCount = 0;
     }
 
     lastMagnitude = magnitude;
   });
 }
 
-// إنهاء
 function finish() {
   if (steps < 5) {
     alert("امشي شوي أول 😅");
