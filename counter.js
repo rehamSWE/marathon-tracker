@@ -16,8 +16,9 @@ let directionChanges = 0;
 // تجاهل الحركات الصغيرة جدًا
 let noiseThreshold = 2;
 
+// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
-  window.location.href = "thanks.html";
+  window.location.href = "index.html";
 }
 
 function start() {
@@ -105,12 +106,14 @@ function finish() {
         phone: phone,
         steps: steps,
       }),
-    },
+    }
   )
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
       localStorage.clear();
-      window.location.href = "index.html";
+
+      // ✅ هنا التعديل المهم
+      window.location.href = "thanks.html";
     })
     .catch(() => {
       alert("صار خطأ في الإرسال ❌");
