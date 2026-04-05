@@ -16,14 +16,30 @@ let directionChanges = 0;
 // تجاهل الحركات الصغيرة
 let noiseThreshold = 2;
 
-// ✅ إذا خلص → يروح للشكر مباشرة
+// حالة الزر
+let started = false;
+
+// إذا خلص → يروح للشكر
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
-// ✅ إذا ما فيه بيانات → يرجع للبداية
+// إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
+}
+
+// 🔥 زر واحد يتحكم بكل شيء
+function handleAction() {
+  if (!started) {
+    start();
+    started = true;
+
+    // تغيير النص إلى "إنهاء"
+    document.getElementById("actionBtn").innerText = "إنهاء";
+  } else {
+    finish();
+  }
 }
 
 function start() {
@@ -117,14 +133,10 @@ function finish() {
     .then(() => {
       alert("تم تسجيل نتيجتك 👏");
 
-      // 🔥 نخلي finished بدون ما نحذفه
       localStorage.setItem("finished", "true");
-
-      // نحذف فقط البيانات القديمة
       localStorage.removeItem("name");
       localStorage.removeItem("phone");
 
-      // انتقال بدون رجوع
       window.location.replace("thanks.html");
     })
     .catch(() => {

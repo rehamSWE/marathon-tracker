@@ -11,22 +11,17 @@
 
     <div id="steps">0</div>
 
-    <!-- زر البداية -->
-    <button onclick="start()">ابدأ</button>
-
-    <!-- زر الإنهاء -->
-    <button onclick="finish()">إنهاء</button>
+    <!-- 🔥 زر واحد فقط -->
+    <button id="actionBtn" onclick="handleAction()">ابدأ</button>
 
     <script src="counter.js"></script>
 
     <!-- 🔥 التحكم بالرجوع -->
     <script>
-      // إذا ما فيه بيانات → يرجع للبداية
       if (!localStorage.getItem("name")) {
         window.location.replace("index.html");
       }
 
-      // إذا خلص → يروح للشكر
       if (localStorage.getItem("finished")) {
         window.location.replace("thanks.html");
       }
