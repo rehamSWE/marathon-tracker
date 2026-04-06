@@ -125,7 +125,6 @@ function finish() {
     }
   )
     .then(() => {
-      alert("تم تسجيل نتيجتك 👏");
 
       localStorage.setItem("finished", "true");
       localStorage.removeItem("name");
