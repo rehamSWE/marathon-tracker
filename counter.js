@@ -19,6 +19,15 @@ let noiseThreshold = 2;
 // ➕ إضافة فقط
 let started = false;
 
+// ➕ العبارات (إضافة فقط)
+let messages = [
+  "هدفنــا 1500 خطوة نحو الأفضل ",
+  "هدفنــا كل خطوة ... تبني نمط حياة أكثر صحة   ",
+  "هدفنــا خطوة منك ... تقلل خطراً على الطريق  ",
+  "هدفنــا بخطواتك ... تنمو مدينة أكثر خضرة واستدامة  ",
+  "هدفنــا اتبع المملر الذكي ... خطوتك في الأمان  ",
+];
+
 // ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
@@ -93,6 +102,13 @@ function startCounting() {
     ) {
       steps++;
       document.getElementById("steps").innerText = steps;
+
+      // ➕ تحديث النص كل 300 خطوة (إضافة فقط)
+      let index = Math.floor(steps / 300);
+      if (index >= messages.length) index = messages.length - 1;
+      document.getElementById("motivationText").innerText =
+        messages[index];
+
       lastStepTime = now;
 
       peakDetected = false;
@@ -125,7 +141,6 @@ function finish() {
     }
   )
     .then(() => {
-
       localStorage.setItem("finished", "true");
       localStorage.removeItem("name");
       localStorage.removeItem("phone");
