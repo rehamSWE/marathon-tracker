@@ -40,7 +40,7 @@ body::before {
   position: relative;
   z-index: 1;
 
-  width: 70%;
+  width: 90%;
   max-width: 380px;
 
   text-align: center;
@@ -49,16 +49,16 @@ body::before {
 
 /* العنوان */
 h2 {
-  font-size: 1.6rem;
-  margin-bottom: 20px;
-  line-height: 1.6;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 /* الحقول */
 input {
   width: 70%;
   margin-bottom: 12px;
-  padding: 14px;
+  padding: 10px;
 
   background-color: transparent;
 
@@ -76,7 +76,7 @@ input:focus {
 /* الزر */
 button {
   width: 70%;
-  padding: 14px;
+  padding: 10px;
 
   background: #2e7d5b;
   color: white;
