@@ -110,7 +110,7 @@ button:active {
 /* ✅ الشعارات (تم إصلاحها هنا فقط) */
 .logos {
   position: fixed; /* 🔥 بدل absolute */
-  bottom: 30px;
+  bottom: 12px;
   left: 0;
   width: 100%;
 
