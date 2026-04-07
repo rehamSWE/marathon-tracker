@@ -101,7 +101,7 @@ button:active {
 /* ✅ الشعارات (تم إصلاحها هنا فقط) */
 .logos {
   position: fixed; /* 🔥 بدل absolute */
-  bottom: 10px;
+  bottom: 30px;
   left: 0;
   width: 100%;
 
@@ -112,13 +112,10 @@ button:active {
 
   z-index: 2;
 
-  /* 👇 خلفية خفيفة مثل التصميم */
-  background: rgba(0, 0, 0, 0.3);
-  padding: 8px 0;
 }
 
 .logos img {
-  width: 45px; /* 👈 صغرناها شوي */
+  width: 85px; /* 👈 صغرناها شوي */
   height: auto;
   opacity: 0.9;
 }
