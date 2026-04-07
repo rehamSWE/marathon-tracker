@@ -10,17 +10,23 @@ html, body {
   overflow: hidden;
 }
 
+
+/* الأساس */
+html, body {
+  overflow: hidden;
+}
+
 body {
   font-family: Arial;
 
-  min-height: 100vh;
+  height: 100dvh; /* 👑 أهم سطر */
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   position: fixed;
-  padding: 0;
+  width: 100%;
 
   background: url("img/1.png") no-repeat center center;
   background-size: cover;
