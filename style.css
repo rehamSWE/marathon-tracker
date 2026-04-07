@@ -42,8 +42,8 @@ body::before {
   position: relative;
   z-index: 1;
 
-  width: 50%;
-  max-width: 200px; /* 👈 كبرناه */
+  width: 90%;
+  max-width: 380px; /* 👈 كبرناه */
 
   text-align: center;
   color: white;
@@ -58,19 +58,26 @@ h2 {
 
 /* الحقول */
 input {
-  width: 100%;
+  width: 70%;
   margin-bottom: 12px;
   padding: 14px;
 
-  border-radius: 25px;
-  border: none;
+  background-color: transparent;
 
-  font-size: 13px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+
+  font-size: 15px;
+}
+
+input:focus{
+    outline: none;
+    border-color: #ccc;
 }
 
 /* الزر */
 button {
-  width: 100%;
+  width: 70%;
   padding: 14px;
 
   background: #2e7d5b;
