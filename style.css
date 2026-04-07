@@ -40,7 +40,7 @@ body::before {
   position: relative;
   z-index: 1;
 
-  width: 90%;
+  width: 70%;
   max-width: 380px;
 
   text-align: center;
@@ -108,7 +108,7 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 
   z-index: 2;
 
