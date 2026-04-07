@@ -98,23 +98,27 @@ button:active {
   transform: scale(0.95);
 }
 
-/* ✅ الشعارات */
+/* ✅ الشعارات (تم إصلاحها هنا فقط) */
 .logos {
-  position: absolute;
-  bottom: 15px;
+  position: fixed; /* 🔥 بدل absolute */
+  bottom: 10px;
   left: 0;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 
-  z-index: 1;
+  z-index: 2;
+
+  /* 👇 خلفية خفيفة مثل التصميم */
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 0;
 }
 
 .logos img {
-  width: 55px;
+  width: 45px; /* 👈 صغرناها شوي */
   height: auto;
   opacity: 0.9;
 }
