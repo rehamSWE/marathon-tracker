@@ -4,21 +4,32 @@
   box-sizing: border-box;
 }
 
+/* 🔥 مهم للجوال */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: Arial;
 
-  height: 100vh;
+  /* 👇 نستخدم min-height بدل height */
+  min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 20px;
   position: relative;
+
+  /* ❌ حذف padding لأنه سبب السكرول */
+  padding: 0;
 
   background: url("img/1.png") no-repeat center center;
   background-size: cover;
 }
 
+/* overlay */
 body::before {
   content: "";
   position: absolute;
@@ -26,44 +37,47 @@ body::before {
   background: rgba(0, 0, 0, 0.4);
 }
 
+/* المحتوى */
 .container {
   position: relative;
-  z-index: 50;
+  z-index: 1;
 
-  width: 100%;
-  max-width: 320px;
+  width: 90%;
+  max-width: 380px; /* 👈 كبرناه */
 
-  padding: 30px;
-  border-radius: 15px;
   text-align: center;
-}
-
-h2 {
   color: white;
-  margin-bottom: 10px;
 }
 
-p {
-  font-size: 14px;
-} 
+/* العنوان */
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
 
-
+/* الحقول */
 input {
   width: 100%;
-  margin-bottom: 10px;
-  padding: 12px;
-  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 14px;
+
+  border-radius: 25px;
   border: none;
-  font-size: 14px;
+
+  font-size: 15px;
 }
 
+/* الزر */
 button {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
+
   background: #2e7d5b;
   color: white;
+
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
+
   font-size: 16px;
-  cursor: pointer;
 }

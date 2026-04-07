@@ -2,6 +2,10 @@
 <html lang="ar">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- 🔥 هذا أهم تعديل للجوال -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>ماراثون المشي</title>
 
     <!-- ربط CSS -->
@@ -10,26 +14,25 @@
 
   <body>
     <div class="container">
+      <h2>
+        نحو مجتمع صحي<br />
+        كل خطوة تصنع إنجاز
+      </h2>
 
-    <h2>نحو مجتمع صحي
-         كل خطوة تصنع إنجاز</h2>
+      <input type="text" id="name" placeholder="الاسم" />
 
-    <input type="text" id="name" placeholder="الاسم" />
+      <input
+        type="tel"
+        id="phone"
+        placeholder="05xxxxxxxx"
+        maxlength="10"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+      />
 
-    <input
-      type="tel"
-      id="phone"
-      placeholder="05xxxxxxxx" 
-      maxlength="10"
-      oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-    />
+      <button onclick="start()">سجل وابدأ التحدي</button>
+    </div>
 
-    <button onclick="start()">سجل وابدأ التحدي</button>
-</div>
     <!-- ربط JS -->
     <script src="script.js"></script>
-
-    <!-- 🔥 التحكم بالرجوع -->
-
   </body>
 </html>
