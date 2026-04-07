@@ -7,15 +7,30 @@
 body {
   font-family: Arial;
   text-align: center;
-  background: #f5f5f5;
 
   /* 👇 أهم تعديل */
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
+
+  justify-content: flex-start;
+  padding-top: 40vh;
+
+background: url("1.png") no-repeat center center;
+background-size: cover;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 input {
