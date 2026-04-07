@@ -13,7 +13,6 @@ html, body {
 body {
   font-family: Arial;
 
-  /* 👇 نستخدم min-height بدل height */
   min-height: 100vh;
 
   display: flex;
@@ -21,8 +20,6 @@ body {
   align-items: center;
 
   position: relative;
-
-  /* ❌ حذف padding لأنه سبب السكرول */
   padding: 0;
 
   background: url("img/1.png") no-repeat center center;
@@ -44,7 +41,7 @@ body::before {
   z-index: 1;
 
   width: 90%;
-  max-width: 380px; /* 👈 كبرناه */
+  max-width: 380px;
 
   text-align: center;
   color: white;
@@ -71,9 +68,9 @@ input {
   font-size: 15px;
 }
 
-input:focus{
-    outline: 1px solid #ccc;
-    border-color: #ccc;
+input:focus {
+  outline: 1px solid #ccc;
+  border-color: #ccc;
 }
 
 /* الزر */
@@ -89,7 +86,7 @@ button {
 
   font-size: 16px;
 
-  transition: 0.2s; /* حركة ناعمة */
+  transition: 0.2s;
 }
 
 button:hover {
@@ -99,4 +96,25 @@ button:hover {
 
 button:active {
   transform: scale(0.95);
+}
+
+/* ✅ الشعارات */
+.logos {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  z-index: 1;
+}
+
+.logos img {
+  width: 55px;
+  height: auto;
+  opacity: 0.9;
 }
