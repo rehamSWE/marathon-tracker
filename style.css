@@ -42,8 +42,8 @@ body::before {
   position: relative;
   z-index: 1;
 
-  width: 90%;
-  max-width: 380px; /* 👈 كبرناه */
+  width: 50%;
+  max-width: 200px; /* 👈 كبرناه */
 
   text-align: center;
   color: white;
@@ -65,7 +65,7 @@ input {
   border-radius: 25px;
   border: none;
 
-  font-size: 15px;
+  font-size: 13px;
 }
 
 /* الزر */
