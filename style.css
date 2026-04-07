@@ -64,14 +64,14 @@ input {
 
   background-color: transparent;
 
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: 25px;
 
   font-size: 15px;
 }
 
 input:focus{
-    outline: none;
+    outline: 1px solid #ccc;
     border-color: #ccc;
 }
 
@@ -83,8 +83,19 @@ button {
   background: #2e7d5b;
   color: white;
 
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 25px;
 
   font-size: 16px;
+
+  transition: 0.2s; /* حركة ناعمة */
+}
+
+button:hover {
+  background: #256b4d;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.95);
 }
