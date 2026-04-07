@@ -17,8 +17,8 @@ body {
   justify-content: flex-start;
   padding-top: 40vh;
 
-background: url("img/1.png") no-repeat center center;
-background-size: cover;
+  background: url("img/1.png") no-repeat center center;
+  background-size: cover;
 }
 
 body::before {
