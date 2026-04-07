@@ -5,11 +5,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-
-  /* 👇 الخلفية */
-  background: url("img/2.png") no-repeat center center;
-  background-size: cover;
+  font-family: Arial;
 
   height: 100vh;
   display: flex;
@@ -18,9 +14,11 @@ body {
 
   padding: 20px;
   position: relative;
+
+  background: url("img/2.png") no-repeat center center;
+  background-size: cover;
 }
 
-/* 👇 طبقة تغميق */
 body::before {
   content: "";
   position: absolute;
@@ -29,28 +27,23 @@ body::before {
 }
 
 .container {
-  text-align: center;
-  background: white;
-
-  width: 90%;
-  max-width: 350px;
-
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-
-  /* 👇 يخليه فوق الخلفية */
   position: relative;
   z-index: 1;
+
+  width: 100%;
+  max-width: 320px;
+
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
 }
 
 h1 {
-  color: #4caf50;
+  color: #2e7d5b;
   margin-bottom: 10px;
-  font-size: 1.4rem;
 }
 
 p {
-  font-size: 1rem;
-  margin-bottom: 15px;
+  font-size: 14px;
 }

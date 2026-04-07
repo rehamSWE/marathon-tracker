@@ -5,63 +5,59 @@
 }
 
 body {
-  font-family: Arial;
-  text-align: center;
+  font-family: Arial, sans-serif;
 
-  /* 👇 أهم تعديل */
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 
-  justify-content: flex-start;
-  padding-top: 40vh;
+  padding: 20px;
+  position: relative;
 
   background: url("img/1.png") no-repeat center center;
   background-size: cover;
 }
 
+/* تغميق */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
 }
 
-body > * {
+/* المحتوى */
+.container {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
 }
 
 input {
-  display: block;
-  margin: 10px auto;
+  width: 100%;
+  margin-bottom: 10px;
   padding: 12px;
-
-  /* 👇 بدل المقاس الثابت */
-  width: 90%;
-  max-width: 320px;
-
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
 }
 
 button {
+  width: 100%;
   padding: 12px;
-  font-size: 1rem;
-
-  /* 👇 يخليه متجاوب */
-  width: 90%;
-  max-width: 320px;
-
-  background: #28a745;
+  background: #2e7d5b;
   color: white;
   border: none;
+  border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 8px;
-}
-
-button:hover {
-  background: #218838;
 }
