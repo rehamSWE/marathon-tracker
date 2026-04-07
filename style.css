@@ -15,7 +15,7 @@ body {
   padding: 20px;
   position: relative;
 
-  background: url("run.jpg") no-repeat center center;
+  background: url("img/1.png") no-repeat center center;
   background-size: cover;
 }
 
@@ -39,11 +39,32 @@ body::before {
   text-align: center;
 }
 
-h1 {
+h2 {
   color: #2e7d5b;
   margin-bottom: 10px;
 }
 
 p {
   font-size: 14px;
+} 
+
+
+input {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #2e7d5b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
 }
