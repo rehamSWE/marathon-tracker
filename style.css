@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: Arial;
 
   height: 100vh;
   display: flex;
@@ -15,49 +15,35 @@ body {
   padding: 20px;
   position: relative;
 
-  background: url("img/1.png") no-repeat center center;
+  background: url("run.jpg") no-repeat center center;
   background-size: cover;
 }
 
-/* تغميق */
 body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
 }
 
-/* المحتوى */
 .container {
   position: relative;
   z-index: 1;
+
   width: 100%;
-  max-width: 350px;
+  max-width: 320px;
+
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
   text-align: center;
-  color: white;
 }
 
-h2 {
-  margin-bottom: 20px;
-  font-size: 1.2rem;
-}
-
-input {
-  width: 100%;
+h1 {
+  color: #2e7d5b;
   margin-bottom: 10px;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  font-size: 14px;
 }
 
-button {
-  width: 100%;
-  padding: 12px;
-  background: #2e7d5b;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
+p {
+  font-size: 14px;
 }
