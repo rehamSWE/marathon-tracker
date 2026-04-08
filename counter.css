@@ -40,7 +40,10 @@ h2 {
   position: static;
   margin-bottom: 15px;
   color: #333;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 700;
 }
 
 /* الكارد */
@@ -62,7 +65,7 @@ h2 {
 
 /* العداد */
 #steps {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #2e7d5b;
   margin-bottom: 20px;
@@ -72,7 +75,7 @@ h2 {
 
 button {
   width: 35%;
-  padding: 10px;
+  padding: 8px;
 
   background: #2e7d5b;
   color: white;
@@ -80,7 +83,7 @@ button {
   border: 1px solid #ccc;
   border-radius: 25px;
 
-  font-size: 16px;
+  font-size: 14px;
 
   transition: 0.2s;
 }
