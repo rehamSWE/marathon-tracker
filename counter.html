@@ -10,13 +10,15 @@
   <body>
 
     <div class="container">
-    <h2>كــل خـطـوة تـقربـك لهدفـك</h2>
-    <div id="steps">0</div>
+      <h2>كــل خـطـوة تـقربـك لهدفـك</h2>
 
-    <!-- زر واحد فقط -->
-    <button id="actionBtn" onclick="handleAction()">ابدأ</button>
-    <!-- ➕ النص التحفيزي (إضافة فقط) -->
-    <p id="motivationText">هدفنــا 1500 خطوة نحو الأفضل  </p>
+      <div id="steps">0</div>
+
+      <!-- زر واحد فقط -->
+      <button id="actionBtn" data-state="start" onclick="handleAction()">ابدأ</button>
+
+      <!-- ➕ النص التحفيزي (إضافة فقط) -->
+      <p id="motivationText">هدفنــا 1500 خطوة نحو الأفضل</p>
     </div>
 
     <script src="counter.js"></script>

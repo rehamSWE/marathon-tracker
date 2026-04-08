@@ -86,6 +86,15 @@ button {
   transition: 0.2s;
 }
 
+/* 👇 الجديد فقط */
+button[data-state="end"] {
+  background: #e74c3c;
+}
+
+button[data-state="end"]:hover {
+  background: #c0392b;
+}
+
 button:hover {
   background: #256b4d;
   cursor: pointer;
@@ -100,4 +109,3 @@ button:active {
     font-size: 1.3rem;
     color: #2b5f56;
 }
-

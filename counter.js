@@ -40,10 +40,15 @@ if (!localStorage.getItem("name")) {
 
 // ➕ هذا فقط الجديد
 function handleAction() {
+  let btn = document.getElementById("actionBtn"); // 👈 أضفنا هذا فقط
+
   if (!started) {
     start();
     started = true;
-    document.getElementById("actionBtn").innerText = "إنهاء";
+
+    btn.innerText = "إنهاء";
+    btn.setAttribute("data-state", "end"); // 👈 هذا السطر الجديد فقط
+
   } else {
     finish();
   }
