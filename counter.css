@@ -93,6 +93,7 @@ button[data-state="end"] {
 
 button[data-state="end"]:hover {
   background: #c0392b;
+  cursor: pointer;
 }
 
 button:hover {
