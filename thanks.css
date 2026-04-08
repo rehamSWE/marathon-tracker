@@ -59,6 +59,7 @@ body::before {
 
 h1 {
   color: #2e7d5b;
+  margin-bottom: 20px;
 }
 
 p {
