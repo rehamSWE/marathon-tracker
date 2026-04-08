@@ -29,26 +29,27 @@ body::before {
 
 /* النص العلوي */
 h2 {
-  position: absolute;
-  top: 60px;
-  color: white;
-  z-index: 1;
+  position: static;
+  margin-bottom: 15px;
+  color: #333;
 }
 
 /* الكارد */
 .container {
-  position: relative;
-  z-index: 1;
-
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  max-width: 320px;
+  height: 36vh;
+ /* max-width: 320px;*/
 
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
 
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 50px 50px 0 0;
   text-align: center;
+  z-index: 1;
 }
 
 /* العداد */
@@ -60,11 +61,34 @@ h2 {
 }
 
 /* الزر */
+
 button {
-  width: 100%;
-  padding: 12px;
-  background: #e74c3c;
+  width: 35%;
+  padding: 10px;
+
+  background: #2e7d5b;
   color: white;
-  border: none;
-  border-radius: 10px;
+
+  border: 1px solid #ccc;
+  border-radius: 25px;
+
+  font-size: 16px;
+
+  transition: 0.2s;
 }
+
+button:hover {
+  background: #256b4d;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#motivationText{
+    margin-top: 16px;
+    font-size: 20px;
+    color: #2b5f56;
+}
+
