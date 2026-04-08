@@ -47,15 +47,21 @@ body::before {
 
   padding: 30px;
   border-radius: 50px 50px 0 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   text-align: center;
   z-index: 1;
 }
 
 h1 {
   color: #2e7d5b;
-  margin-bottom: 10px;
 }
 
 p {
   font-size: 1.4rem;
+  margin-bottom: 12px;
 }
