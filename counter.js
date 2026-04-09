@@ -114,7 +114,7 @@ function startCounting() {
     let smooth = (magnitude + lastMagnitude) / 2;
 
     // 👇 نطاق المشي الطبيعي (يمنع حركة اليد الخفيفة)
-    if (smooth > 2 && smooth < 90) {
+    if (smooth > 4 && smooth < 20) {
 
       if (
         directionChanges >= 0.1 &&
