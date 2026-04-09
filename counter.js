@@ -3,7 +3,7 @@ let lastStepTime = 0;
 
 // حساسية الحركة (تم التعديل فقط هنا)
 let threshold = 3;
-let minStepInterval = 400;
+let minStepInterval = 500;
 
 // تتبع الحركة
 let lastMagnitude = 0;
@@ -14,7 +14,7 @@ let lastY = 0;
 let directionChanges = 0;
 
 // تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
-let noiseThreshold = 0.7;
+let noiseThreshold = 0.5;
 
 // ➕ إضافة فقط
 let started = false;
@@ -117,7 +117,7 @@ function startCounting() {
     if (smooth > 4 && smooth < 15) {
 
       if (
-        directionChanges >= 0.1 &&
+        directionChanges >= 0 &&
         now - lastStepTime > minStepInterval
       ) {
         steps++;
