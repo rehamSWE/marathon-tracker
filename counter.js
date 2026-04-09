@@ -14,7 +14,7 @@ let lastY = 0;
 let directionChanges = 0;
 
 // تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
-let noiseThreshold = 0.9;
+let noiseThreshold = 0.6;
 
 // ➕ إضافة فقط
 let started = false;
@@ -114,7 +114,7 @@ function startCounting() {
     let smooth = (magnitude + lastMagnitude) / 2;
 
     // 👇 نطاق المشي الطبيعي (يمنع حركة اليد الخفيفة)
-    if (smooth > 5 && smooth < 20) {
+    if (smooth > 2 && smooth < 90) {
 
       if (
         directionChanges >= 0.1 &&
