@@ -23,10 +23,23 @@ let started = false;
 let messages = [
   "هدفنــا 1500 خطوة نحو الأفضل ",
   "هدفنــا كل خطوة ... تبني نمط حياة أكثر صحة   ",
-  "هدفنــا خطوة منك ... تقلل خطراً على الطريق  ",
+  "هدفنــا  مع كل خطوة ... بيئة أنقى وهواء أنظف  ",
   "هدفنــا بخطواتك ... تنمو مدينة أكثر خضرة واستدامة  ",
-  "هدفنــا اتبع المملر الذكي ... خطوتك في الأمان  ",
+  "هدفنــا اتبع الممر الذكي ... خطوتك في الأمان  ",
+  "هدفنــا بخطواتك ... نبني مجتمع أكثر نشاط ",
+  "هدفنــا مع كل خطوة ... نعيد للطبيعة توازنها  ",
+  "هدفنــا التزامك  ... طريق أكثر أمان للجميع ",
+  "هدفنــا مع كل خطوة ... طاقة أكثر وحياة أجمل  ",
+  "هدفنــا مع كل خطوة ... نحمي الأرواح قبل الوصول ",
+  "هدفنــا خطوة منك ... تعزز صحتك كل يوم ",
+  "هدفنــا خطوة منك ... تزرع أمل لمستقبل أخضر ",
+  "هدفنــا انتباهك ... يصنع فرق في سلامة الطريق ",
+  "هدفنــا انتباهك ... يحميك من المخاطر  ",
+  "هدفنــا كل خطوة ... استثمار في صحتك ",
 ];
+
+// ➕ جديد (فقط)
+let goalReached = false;
 
 // ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
@@ -40,14 +53,14 @@ if (!localStorage.getItem("name")) {
 
 // ➕ هذا فقط الجديد
 function handleAction() {
-  let btn = document.getElementById("actionBtn"); // 👈 أضفنا هذا فقط
+  let btn = document.getElementById("actionBtn");
 
   if (!started) {
     start();
     started = true;
 
     btn.innerText = "إنهاء";
-    btn.setAttribute("data-state", "end"); // 👈 هذا السطر الجديد فقط
+    btn.setAttribute("data-state", "end");
 
   } else {
     finish();
@@ -108,11 +121,18 @@ function startCounting() {
       steps++;
       document.getElementById("steps").innerText = steps;
 
-      // ➕ تحديث النص كل 300 خطوة (إضافة فقط)
-      let index = Math.floor(steps / 300);
+      // ➕ تحديث النص
+      let index = Math.floor(steps / 100);
       if (index >= messages.length) index = messages.length - 1;
       document.getElementById("motivationText").innerText =
         messages[index];
+
+      // 🔥🔥🔥 الإضافة المطلوبة فقط
+      if (steps >= 1500 && !goalReached) {
+        goalReached = true;
+
+        showGoalPopup();
+      }
 
       lastStepTime = now;
 
@@ -123,6 +143,28 @@ function startCounting() {
     lastMagnitude = magnitude;
     lastY = acc.y;
   });
+}
+
+// 🔥 popup function (إضافة فقط)
+function showGoalPopup() {
+  let popup = document.createElement("div");
+  popup.id = "goalPopup";
+
+  popup.innerHTML = `
+    <div class="popupBox">
+      <h3>🎉 مبروك!</h3>
+      <p>وصلت لهدفك 1500 خطوة 👏<br>استمر في التقدم!</p>
+      <button onclick="closePopup()">استمر</button>
+    </div>
+  `;
+
+  document.body.appendChild(popup);
+}
+
+// 🔥 إغلاق popup (إضافة فقط)
+function closePopup() {
+  let popup = document.getElementById("goalPopup");
+  if (popup) popup.remove();
 }
 
 function finish() {

@@ -110,3 +110,45 @@ button:active {
     font-size: 1.3rem;
     color: #2b5f56;
 }
+
+#goalPopup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+.popupBox {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+
+  width: 80%;
+  max-width: 300px;
+}
+
+.popupBox h3 {
+  color: #2e7d5b;
+  margin-bottom: 10px;
+}
+
+.popupBox p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.popupBox button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: #e74c3c;
+  color: white;
+  font-size: 14px;
+}
