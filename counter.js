@@ -1,9 +1,9 @@
 let steps = 0;
 let lastStepTime = 0;
 
-// حساسية الحركة
-let threshold = 13;
-let minStepInterval = 700;
+// حساسية الحركة (تم التعديل فقط هنا)
+let threshold = 11;
+let minStepInterval = 400;
 
 // تتبع الحركة
 let lastMagnitude = 0;
@@ -13,8 +13,8 @@ let peakDetected = false;
 let lastY = 0;
 let directionChanges = 0;
 
-// تجاهل الحركات الصغيرة
-let noiseThreshold = 2;
+// تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
+let noiseThreshold = 1;
 
 // ➕ إضافة فقط
 let started = false;
@@ -105,17 +105,21 @@ function startCounting() {
       return;
     }
 
+    // تتبع الاتجاه
     if ((acc.y > 0 && lastY <= 0) || (acc.y < 0 && lastY >= 0)) {
       directionChanges++;
     }
 
-    if (magnitude > threshold && magnitude > lastMagnitude) {
+    // ✅ تحسين كشف الخطوة (smooth) ← التعديل هنا فقط
+    let smooth = (magnitude + lastMagnitude) / 2;
+
+    if (smooth > threshold && smooth > lastMagnitude) {
       peakDetected = true;
     }
 
     if (
       peakDetected &&
-      directionChanges >= 2 &&
+      directionChanges >= 1 && // ← تم التعديل هنا فقط
       now - lastStepTime > minStepInterval
     ) {
       steps++;
@@ -127,10 +131,9 @@ function startCounting() {
       document.getElementById("motivationText").innerText =
         messages[index];
 
-      // 🔥🔥🔥 الإضافة المطلوبة فقط
+      // 🔥 popup الهدف
       if (steps >= 1500 && !goalReached) {
         goalReached = true;
-
         showGoalPopup();
       }
 
@@ -153,7 +156,7 @@ function showGoalPopup() {
   popup.innerHTML = `
     <div class="popupBox">
       <h3>🎉 مبروك</h3>
-      <p>وصـلـت لـهـدفـــك 1500 خطوة 👏</p>
+      <p>وصـلـت لـهـدفـــك 1500 خطوة</p>
       <button onclick="closePopup()">استمر في التقدم</button>
     </div>
   `;

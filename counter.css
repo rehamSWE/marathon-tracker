@@ -140,7 +140,7 @@ button:active {
 }
 
 .popupBox p {
-  font-size: 1.3rem;;
+  font-size: 1.2rem;;
   margin-bottom: 15px;
 }
 
@@ -149,7 +149,7 @@ button:active {
   padding: 12px;
   border: none;
   border-radius: 25px;
-  background: #2b5f56;
+  background: #2e7d5b;
   color: white;
   font-size: 14px;
 }
