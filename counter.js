@@ -2,7 +2,7 @@ let steps = 0;
 let lastStepTime = 0;
 
 // حساسية الحركة (تم التعديل فقط هنا)
-let threshold = 3;
+let threshold = 5;
 let minStepInterval = 500;
 
 // تتبع الحركة
@@ -14,7 +14,7 @@ let lastY = 0;
 let directionChanges = 0;
 
 // تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
-let noiseThreshold = 0.5;
+let noiseThreshold = 0.9;
 
 // ➕ إضافة فقط
 let started = false;
