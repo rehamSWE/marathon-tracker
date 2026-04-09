@@ -14,7 +14,7 @@ let lastY = 0;
 let directionChanges = 0;
 
 // تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
-let noiseThreshold = 0.9;
+let noiseThreshold = 1;
 
 // ➕ إضافة فقط
 let started = false;
