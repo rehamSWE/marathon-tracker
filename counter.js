@@ -2,7 +2,7 @@ let steps = 0;
 let lastStepTime = 0;
 
 // حساسية الحركة (تم التعديل فقط هنا)
-let threshold = 10;
+let threshold = 5;
 let minStepInterval = 400;
 
 // تتبع الحركة
