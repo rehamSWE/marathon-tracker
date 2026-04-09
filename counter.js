@@ -2,8 +2,8 @@ let steps = 0;
 let lastStepTime = 0;
 
 // حساسية الحركة (تم التعديل فقط هنا)
-let threshold = 11;
-let minStepInterval = 400;
+let threshold = 12;
+let minStepInterval = 450;
 
 // تتبع الحركة
 let lastMagnitude = 0;
@@ -14,7 +14,7 @@ let lastY = 0;
 let directionChanges = 0;
 
 // تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
-let noiseThreshold = 1;
+let noiseThreshold = 1.2;
 
 // ➕ إضافة فقط
 let started = false;
@@ -110,37 +110,34 @@ function startCounting() {
       directionChanges++;
     }
 
-    // ✅ تحسين كشف الخطوة (smooth) ← التعديل هنا فقط
+    // 🔥 تحسين واقعي (بدل الاعتماد على القوة فقط)
     let smooth = (magnitude + lastMagnitude) / 2;
 
-    if (smooth > threshold && smooth > lastMagnitude) {
-      peakDetected = true;
-    }
+    // 👇 نطاق المشي الطبيعي (يمنع حركة اليد الخفيفة)
+    if (smooth > 10 && smooth < 18) {
 
-    if (
-      peakDetected &&
-      directionChanges >= 1 && // ← تم التعديل هنا فقط
-      now - lastStepTime > minStepInterval
-    ) {
-      steps++;
-      document.getElementById("steps").innerText = steps;
+      if (
+        directionChanges >= 1 &&
+        now - lastStepTime > minStepInterval
+      ) {
+        steps++;
+        document.getElementById("steps").innerText = steps;
 
-      // ➕ تحديث النص
-      let index = Math.floor(steps / 100);
-      if (index >= messages.length) index = messages.length - 1;
-      document.getElementById("motivationText").innerText =
-        messages[index];
+        // ➕ تحديث النص
+        let index = Math.floor(steps / 100);
+        if (index >= messages.length) index = messages.length - 1;
+        document.getElementById("motivationText").innerText =
+          messages[index];
 
-      // 🔥 popup الهدف
-      if (steps >= 1500 && !goalReached) {
-        goalReached = true;
-        showGoalPopup();
+        // 🔥 popup الهدف
+        if (steps >= 1500 && !goalReached) {
+          goalReached = true;
+          showGoalPopup();
+        }
+
+        lastStepTime = now;
+        directionChanges = 0;
       }
-
-      lastStepTime = now;
-
-      peakDetected = false;
-      directionChanges = 0;
     }
 
     lastMagnitude = magnitude;
