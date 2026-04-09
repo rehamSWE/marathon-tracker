@@ -152,9 +152,9 @@ function showGoalPopup() {
 
   popup.innerHTML = `
     <div class="popupBox">
-      <h3>🎉 مبروك!</h3>
-      <p>وصلت لهدفك 1500 خطوة 👏<br>استمر في التقدم!</p>
-      <button onclick="closePopup()">استمر</button>
+      <h3>🎉 مبروك</h3>
+      <p>وصـلـت لـهـدفـــك 1500 خطوة 👏</p>
+      <button onclick="closePopup()">استمر في التقدم</button>
     </div>
   `;
 

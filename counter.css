@@ -114,7 +114,7 @@ button:active {
 #goalPopup {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.8);
 
   display: flex;
   justify-content: center;
@@ -136,10 +136,11 @@ button:active {
 .popupBox h3 {
   color: #2e7d5b;
   margin-bottom: 10px;
+  font-size: 1.4rem;;
 }
 
 .popupBox p {
-  font-size: 14px;
+  font-size: 1.3rem;;
   margin-bottom: 15px;
 }
 
@@ -148,7 +149,7 @@ button:active {
   padding: 12px;
   border: none;
   border-radius: 25px;
-  background: #e74c3c;
+  background: #2b5f56;
   color: white;
   font-size: 14px;
 }
