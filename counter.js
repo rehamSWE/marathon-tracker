@@ -19,26 +19,42 @@ let noiseThreshold = 1;
 // ➕ إضافة فقط
 let started = false;
 
-// ➕ العبارات (إضافة فقط)
+// 🔊 صوت الخطوات
+let stepSound = new Audio("sounds/1.mp3");
+
+// 🔊 صوت الهدف (تصفيق)
+let goalSound = new Audio("sounds/goal.wav");
+
+// ➕ العبارات
 let messages = [
-  "هدفنــا 1500 خطوة نحو الأفضل ",
-  "هدفنــا كل خطوة .. تبني نمط حياة أكثر صحة   ",
-  "هدفنــا  مع كل خطوة .. بيئة أنقى وهواء أنظف  ",
-  "هدفنــا بخطواتك .. تنمو مدينة أكثر خضرة واستدامة  ",
-  "هدفنــا اتبع الممر الذكي .. خطوتك في الأمان  ",
-  "هدفنــا بخطواتك .. نبني مجتمع أكثر نشاط ",
-  "هدفنــا مع كل خطوة .. نعيد للطبيعة توازنها  ",
-  "هدفنــا التزامك  .. طريق أكثر أمان للجميع ",
-  "هدفنــا مع كل خطوة .. طاقة أكثر وحياة أجمل  ",
-  "هدفنــا مع كل خطوة .. نحمي الأرواح قبل الوصول ",
-  "هدفنــا خطوة منك .. تعزز صحتك كل يوم ",
-  "هدفنــا خطوة منك .. تزرع أمل لمستقبل أخضر ",
-  "هدفنــا انتباهك .. يصنع فرق في سلامة الطريق ",
-  "هدفنــا انتباهك .. يحميك من المخاطر  ",
-  "هدفنــا كل خطوة .. استثمار في صحتك ",
+"هدفنــا 1500 خطوة نحو الأفضل ",
+"هدفنــا  مع كل خطوة .. بيئة أنقى وهواء أنظف  ",
+"هدفنــا بخطواتك .. نبني مجتمع أكثر نشاط ",
+"هدفنــا انتباهك .. يصنع فرق في سلامة الطريق ",
+" مديـنـتـك أمــانــة .. فاجعلها خضراء ",
+"جــســد نـشـيــط .. عقل صافي وحياة أفضل ",
+" كــن واعــياً .. تصل سالمًا ",
+" التشجير روح المدينة المستدامة ",
+"هدفنــا مع كل خطوة .. طاقة أكثر وحياة أجمل  ",
+" الـتفاعــل مـع الـمـمـر الــذكـي .. سلوك حضاري ",
+"المدن الخضراء تبدأ بخطوة صغيرة  ",
+"هدفنــا كل خطوة .. تبني نمط حياة أكثر صحة   ",
+"هدفنــا اتبع الممر الذكي .. خطوتك في الأمان  ",
+" البيئة النظيفة تبدأ بمساحة خضراء ",
+" كـــل خـــطــوة .. تقرّبك من نسخة أقوى منك ",
+"هدفنــا انتباهك .. يحميك من المخاطر  ",
+"التشجير روح المدينة المستدامة  ",
+"هدفنــا كل خطوة .. استثمار في صحتك ",
+" سـلامتك تبدأ بخطوة واعية ",
+" ازرعـــهـا الـيــوم .. لتظلك غدًا ",
+"هدفنــا خطوة منك .. تعزز صحتك كل يوم ",
+" الممر الـذكـي يــوجّـهـك .. فاستجب له ",
+"هدفنــا  مع كل خطوة .. بيئة أنقى وهواء أنظف  ",
+"هدفنــا التزامك  .. طريق أكثر أمان للجميع ",
+" طـــريــق آمـــن .. مجتمع مطمئن "
 ];
 
-// ➕ جديد (فقط)
+// ➕ جديد
 let goalReached = false;
 
 // ✅ إذا خلص → يروح للشكر مباشرة
@@ -51,7 +67,6 @@ if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
 
-// ➕ هذا فقط الجديد
 function handleAction() {
   let btn = document.getElementById("actionBtn");
 
@@ -105,15 +120,12 @@ function startCounting() {
       return;
     }
 
-    // تتبع الاتجاه
     if ((acc.y > 0 && lastY <= 0) || (acc.y < 0 && lastY >= 0)) {
       directionChanges++;
     }
 
-    // 🔥 تحسين واقعي (بدل الاعتماد على القوة فقط)
     let smooth = (magnitude + lastMagnitude) / 2;
 
-    // 👇 نطاق المشي الطبيعي (يمنع حركة اليد الخفيفة)
     if (smooth > 4 && smooth < 15) {
 
       if (
@@ -123,15 +135,35 @@ function startCounting() {
         steps++;
         document.getElementById("steps").innerText = steps;
 
-        // ➕ تحديث النص
-        let index = Math.floor(steps / 100);
-        if (index >= messages.length) index = messages.length - 1;
-        document.getElementById("motivationText").innerText =
-          messages[index];
+        // ✅ loop العبارات + حركة 🔥
+        let index = Math.floor(steps / 50) % messages.length;
+        let textEl = document.getElementById("motivationText");
 
-        // 🔥 popup الهدف
+        textEl.classList.remove("fade");
+        void textEl.offsetWidth; // 🔥 إعادة تشغيل الأنيميشن
+        textEl.innerText = messages[index];
+        textEl.classList.add("fade");
+
+        // 📳 اهتزاز
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+
+        // 🔊 صوت الخطوة
+        stepSound.currentTime = 0;
+        stepSound.play();
+
+        // 🎉 الهدف
         if (steps >= 1500 && !goalReached) {
           goalReached = true;
+
+          goalSound.currentTime = 0;
+          goalSound.play();
+
+          if (navigator.vibrate) {
+            navigator.vibrate([200, 100, 200]);
+          }
+
           showGoalPopup();
         }
 
@@ -145,7 +177,6 @@ function startCounting() {
   });
 }
 
-// 🔥 popup function (إضافة فقط)
 function showGoalPopup() {
   let popup = document.createElement("div");
   popup.id = "goalPopup";
@@ -161,7 +192,6 @@ function showGoalPopup() {
   document.body.appendChild(popup);
 }
 
-// 🔥 إغلاق popup (إضافة فقط)
 function closePopup() {
   let popup = document.getElementById("goalPopup");
   if (popup) popup.remove();
