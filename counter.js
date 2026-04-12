@@ -57,10 +57,25 @@ let messages = [
 // ➕ جديد
 let goalReached = false;
 
+// 🔥 حل مشكلة الصوت (إضافة فقط)
+function unlockAudio() {
+  stepSound.play().then(() => {
+    stepSound.pause();
+    stepSound.currentTime = 0;
+  }).catch(()=>{});
+
+  goalSound.play().then(() => {
+    goalSound.pause();
+    goalSound.currentTime = 0;
+  }).catch(()=>{});
+}
+
+// ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
+// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
@@ -69,6 +84,8 @@ function handleAction() {
   let btn = document.getElementById("actionBtn");
 
   if (!started) {
+    unlockAudio(); // 🔥 مهم جدًا
+
     start();
     started = true;
 
@@ -148,9 +165,9 @@ function startCounting() {
 
           // 🔊 صوت
           stepSound.currentTime = 0;
-          stepSound.play();
+          stepSound.play().catch(()=>{});
 
-          // 📳 اهتزاز خفيف
+          // 📳 اهتزاز
           if (navigator.vibrate) {
             navigator.vibrate(50);
           }
@@ -161,7 +178,7 @@ function startCounting() {
           goalReached = true;
 
           goalSound.currentTime = 0;
-          goalSound.play();
+          goalSound.play().catch(()=>{});
 
           if (navigator.vibrate) {
             navigator.vibrate([200, 100, 200]);
