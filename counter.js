@@ -1,7 +1,7 @@
 let steps = 0;
 let lastStepTime = 0;
 
-// حساسية الحركة (تم التعديل فقط هنا)
+// حساسية الحركة
 let threshold = 9;
 let minStepInterval = 600;
 
@@ -13,7 +13,7 @@ let peakDetected = false;
 let lastY = 0;
 let directionChanges = 0;
 
-// تجاهل الحركات الصغيرة (تم التعديل فقط هنا)
+// تجاهل الحركات الصغيرة
 let noiseThreshold = 1;
 
 // ➕ إضافة فقط
@@ -57,7 +57,10 @@ let messages = [
 // ➕ جديد
 let goalReached = false;
 
-// 🔥 حل مشكلة الصوت (إضافة فقط)
+// ➕ أهم سطر (يتتبع المرحلة)
+let lastMessageIndex = -1;
+
+// 🔥 حل الصوت
 function unlockAudio() {
   stepSound.play().then(() => {
     stepSound.pause();
@@ -70,12 +73,10 @@ function unlockAudio() {
   }).catch(()=>{});
 }
 
-// ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
-// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
@@ -84,7 +85,7 @@ function handleAction() {
   let btn = document.getElementById("actionBtn");
 
   if (!started) {
-    unlockAudio(); // 🔥 مهم جدًا
+    unlockAudio();
 
     start();
     started = true;
@@ -152,10 +153,12 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        // ✅ فقط كل 50 خطوة
-        if (steps % 50 === 0) {
+        // ✅ نحسب المرحلة
+        let index = Math.floor(steps / 50) % messages.length;
 
-          let index = Math.floor(steps / 50) % messages.length;
+        // ✅ إذا تغيرت العبارة فقط
+        if (index !== lastMessageIndex) {
+          lastMessageIndex = index;
 
           // 🔥 أنيميشن
           textEl.classList.remove("fade");
