@@ -57,7 +57,7 @@ let messages = [
 // ➕ جديد
 let goalReached = false;
 
-// ➕ أهم سطر (يتتبع المرحلة)
+// ➕ هذا أهم إضافة (تتبع المرحلة)
 let lastMessageIndex = -1;
 
 // 🔥 حل الصوت
@@ -73,10 +73,12 @@ function unlockAudio() {
   }).catch(()=>{});
 }
 
+// ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
+// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
