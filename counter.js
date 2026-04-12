@@ -149,29 +149,31 @@ function startCounting() {
         let textEl = document.getElementById("motivationText");
 
         // ✅ الحل النهائي 🔥
-        if (steps >= 50 && steps % 50 === 0) {
+let currentMilestone = Math.floor(steps / 50);
 
-          let index = Math.floor(steps / 50) - 1;
-          index = index % messages.length;
+if (steps >= 50 && currentMilestone !== lastMilestone) {
+  lastMilestone = currentMilestone;
 
-          if (index !== lastMessageIndex) {
-            lastMessageIndex = index;
+  let index = (currentMilestone - 1) % messages.length;
 
-            textEl.classList.remove("fade");
-            void textEl.offsetWidth;
-            textEl.innerText = messages[index];
-            textEl.classList.add("fade");
+  if (index !== lastMessageIndex) {
+    lastMessageIndex = index;
 
-            // 🔊 صوت
-            stepSound.currentTime = 0;
-            stepSound.play().catch(()=>{});
+    textEl.classList.remove("fade");
+    void textEl.offsetWidth;
+    textEl.innerText = messages[index];
+    textEl.classList.add("fade");
 
-            // 📳 اهتزاز
-            if (navigator.vibrate) {
-              navigator.vibrate(50);
-            }
-          }
-        }
+    // 🔊 صوت
+    stepSound.currentTime = 0;
+    stepSound.play().catch(()=>{});
+
+    // 📳 اهتزاز
+    if (navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+  }
+}
 
         if (steps >= 1500 && !goalReached) {
           goalReached = true;
