@@ -54,13 +54,9 @@ let messages = [
 " طـــريــق آمـــن .. مجتمع مطمئن "
 ];
 
-// ➕ جديد
 let goalReached = false;
-
-// ➕ تتبع آخر عبارة
 let lastMessageIndex = -1;
 
-// 🔥 حل الصوت
 function unlockAudio() {
   stepSound.play().then(() => {
     stepSound.pause();
@@ -73,12 +69,10 @@ function unlockAudio() {
   }).catch(()=>{});
 }
 
-// ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
-// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
@@ -88,7 +82,6 @@ function handleAction() {
 
   if (!started) {
     unlockAudio();
-
     start();
     started = true;
 
@@ -114,7 +107,7 @@ function requestPermission() {
         if (response === "granted") {
           startCounting();
         } else {
-          alert("يجب السماح بالحركة  ");
+          alert("يجب السماح بالحركة");
         }
       })
       .catch(console.error);
@@ -155,24 +148,28 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        // ✅ التعديل هنا فقط 🔥
-        let index = Math.floor((steps - 1) / 50) % messages.length;
+        // ✅ الحل النهائي 🔥
+        if (steps >= 50 && steps % 50 === 0) {
 
-        if (index !== lastMessageIndex) {
-          lastMessageIndex = index;
+          let index = Math.floor(steps / 50) - 1;
+          index = index % messages.length;
 
-          textEl.classList.remove("fade");
-          void textEl.offsetWidth;
-          textEl.innerText = messages[index];
-          textEl.classList.add("fade");
+          if (index !== lastMessageIndex) {
+            lastMessageIndex = index;
 
-          // 🔊 صوت
-          stepSound.currentTime = 0;
-          stepSound.play().catch(()=>{});
+            textEl.classList.remove("fade");
+            void textEl.offsetWidth;
+            textEl.innerText = messages[index];
+            textEl.classList.add("fade");
 
-          // 📳 اهتزاز
-          if (navigator.vibrate) {
-            navigator.vibrate(50);
+            // 🔊 صوت
+            stepSound.currentTime = 0;
+            stepSound.play().catch(()=>{});
+
+            // 📳 اهتزاز
+            if (navigator.vibrate) {
+              navigator.vibrate(50);
+            }
           }
         }
 
