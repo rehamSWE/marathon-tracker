@@ -1,31 +1,22 @@
 let steps = 0;
 let lastStepTime = 0;
 
-// حساسية الحركة
 let threshold = 9;
 let minStepInterval = 600;
 
-// تتبع الحركة
 let lastMagnitude = 0;
 let peakDetected = false;
 
-// تتبع الاتجاه
 let lastY = 0;
 let directionChanges = 0;
 
-// تجاهل الحركات الصغيرة
 let noiseThreshold = 1;
 
-// ➕ إضافة فقط
 let started = false;
 
-// 🔊 صوت الخطوات
 let stepSound = new Audio("sounds/1.mp3");
-
-// 🔊 صوت الهدف (تصفيق)
 let goalSound = new Audio("sounds/goal.wav");
 
-// ➕ العبارات
 let messages = [
 "هدفنــا 1500 خطوة نحو الأفضل ",
 "هدفنــا  مع كل خطوة .. بيئة أنقى وهواء أنظف  ",
@@ -54,13 +45,9 @@ let messages = [
 " طـــريــق آمـــن .. مجتمع مطمئن "
 ];
 
-// ➕ جديد
 let goalReached = false;
-
-// ➕ هذا أهم إضافة (تتبع المرحلة)
 let lastMessageIndex = -1;
 
-// 🔥 حل الصوت
 function unlockAudio() {
   stepSound.play().then(() => {
     stepSound.pause();
@@ -73,12 +60,10 @@ function unlockAudio() {
   }).catch(()=>{});
 }
 
-// ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
-// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
@@ -155,30 +140,25 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        // ✅ نحسب المرحلة
-        let index = Math.floor(steps / 50) % messages.length;
+        // ✅ التعديل هنا فقط 🔥
+        let index = Math.floor((steps - 1) / 50) % messages.length;
 
-        // ✅ إذا تغيرت العبارة فقط
         if (index !== lastMessageIndex) {
           lastMessageIndex = index;
 
-          // 🔥 أنيميشن
           textEl.classList.remove("fade");
           void textEl.offsetWidth;
           textEl.innerText = messages[index];
           textEl.classList.add("fade");
 
-          // 🔊 صوت
           stepSound.currentTime = 0;
           stepSound.play().catch(()=>{});
 
-          // 📳 اهتزاز
           if (navigator.vibrate) {
             navigator.vibrate(50);
           }
         }
 
-        // 🎉 الهدف
         if (steps >= 1500 && !goalReached) {
           goalReached = true;
 
