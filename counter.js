@@ -57,12 +57,10 @@ let messages = [
 // ➕ جديد
 let goalReached = false;
 
-// ✅ إذا خلص → يروح للشكر مباشرة
 if (localStorage.getItem("finished")) {
   window.location.replace("thanks.html");
 }
 
-// ✅ إذا ما فيه بيانات → يرجع للبداية
 if (!localStorage.getItem("name")) {
   window.location.replace("index.html");
 }
@@ -135,23 +133,28 @@ function startCounting() {
         steps++;
         document.getElementById("steps").innerText = steps;
 
-        // ✅ loop العبارات + حركة 🔥
-        let index = Math.floor(steps / 50) % messages.length;
         let textEl = document.getElementById("motivationText");
 
-        textEl.classList.remove("fade");
-        void textEl.offsetWidth; // 🔥 إعادة تشغيل الأنيميشن
-        textEl.innerText = messages[index];
-        textEl.classList.add("fade");
+        // ✅ فقط كل 50 خطوة
+        if (steps % 50 === 0) {
 
-        // 📳 اهتزاز
-        if (navigator.vibrate) {
-          navigator.vibrate(50);
+          let index = Math.floor(steps / 50) % messages.length;
+
+          // 🔥 أنيميشن
+          textEl.classList.remove("fade");
+          void textEl.offsetWidth;
+          textEl.innerText = messages[index];
+          textEl.classList.add("fade");
+
+          // 🔊 صوت
+          stepSound.currentTime = 0;
+          stepSound.play();
+
+          // 📳 اهتزاز خفيف
+          if (navigator.vibrate) {
+            navigator.vibrate(50);
+          }
         }
-
-        // 🔊 صوت الخطوة
-        stepSound.currentTime = 0;
-        stepSound.play();
 
         // 🎉 الهدف
         if (steps >= 1500 && !goalReached) {
