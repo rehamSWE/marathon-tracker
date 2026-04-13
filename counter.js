@@ -158,7 +158,7 @@ function startCounting() {
 
             // 📳 اهتزاز فقط
             if (navigator.vibrate) {
-              navigator.vibrate(50);
+              navigator.vibrate([200, 100, 200]);
             }
           }
         }
