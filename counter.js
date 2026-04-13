@@ -19,11 +19,24 @@ let noiseThreshold = 1;
 // ➕ إضافة فقط
 let started = false;
 
-// 🔊 صوت الرسائل (جديد فقط)
+// 🔊 صوت الرسائل
 let messageSound = new Audio("sounds/1.mp3");
 
 // 🔊 صوت الهدف
 let goalSound = new Audio("sounds/goal.wav");
+
+// 🔓 حل مشكلة الصوت (الإضافة المهمة فقط)
+function unlockAudio() {
+  messageSound.play().then(() => {
+    messageSound.pause();
+    messageSound.currentTime = 0;
+  }).catch(()=>{});
+
+  goalSound.play().then(() => {
+    goalSound.pause();
+    goalSound.currentTime = 0;
+  }).catch(()=>{});
+}
 
 // ➕ العبارات
 let messages = [
@@ -77,7 +90,8 @@ function handleAction() {
   let btn = document.getElementById("actionBtn");
 
   if (!started) {
-    playGoalSound(); // 🔊 عند البدء
+    unlockAudio(); // 🔥 هذا أهم تعديل
+    playGoalSound();
 
     start();
     started = true;
@@ -145,7 +159,6 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        // 🔥 Stage system
         let currentStage = Math.floor(steps / 50);
 
         if (currentStage > lastStage) {
@@ -159,7 +172,7 @@ function startCounting() {
           textEl.innerText = messages[index];
           textEl.classList.add("fade");
 
-          // 🔊 صوت مع كل عبارة 🔥 (الإضافة المطلوبة)
+          // 🔊 الصوت الآن بيشتغل صح 🔥
           messageSound.currentTime = 0;
           messageSound.play().catch(()=>{});
 
@@ -169,7 +182,6 @@ function startCounting() {
           }
         }
 
-        // 🎯 الهدف
         if (steps >= 1500 && !goalReached) {
           goalReached = true;
 
