@@ -19,7 +19,7 @@ let noiseThreshold = 1;
 // ➕ إضافة فقط
 let started = false;
 
-// 🔊 صوت الخطوات
+// 🔊 صوت البداية فقط
 let stepSound = new Audio("sounds/1.mp3");
 
 // 🔊 صوت الهدف (تصفيق)
@@ -56,6 +56,7 @@ let messages = [
 
 let goalReached = false;
 let lastMessageIndex = -1;
+let lastMilestone = 0; // ⭐ مهم
 
 function unlockAudio() {
   stepSound.play().then(() => {
@@ -82,6 +83,11 @@ function handleAction() {
 
   if (!started) {
     unlockAudio();
+
+    // 🔊 صوت البداية فقط
+    stepSound.currentTime = 0;
+    stepSound.play().catch(()=>{});
+
     start();
     started = true;
 
@@ -148,11 +154,13 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        // ✅ الحل النهائي 🔥
-        if (steps >= 50 && steps % 50 === 0) {
+        // ✅ الحل الجديد (milestone)
+        let currentMilestone = Math.floor(steps / 50);
 
-          let index = Math.floor(steps / 50) - 1;
-          index = index % messages.length;
+        if (steps >= 50 && currentMilestone !== lastMilestone) {
+          lastMilestone = currentMilestone;
+
+          let index = (currentMilestone - 1) % messages.length;
 
           if (index !== lastMessageIndex) {
             lastMessageIndex = index;
@@ -162,13 +170,13 @@ function startCounting() {
             textEl.innerText = messages[index];
             textEl.classList.add("fade");
 
-            // 🔊 صوت
-            stepSound.currentTime = 0;
-            stepSound.play().catch(()=>{});
-
             // 📳 اهتزاز
             if (navigator.vibrate) {
-              navigator.vibrate(50);
+              if (currentMilestone % 4 === 0) {
+                navigator.vibrate([100, 50, 100]); // كل 200 خطوة 🔥
+              } else {
+                navigator.vibrate(50);
+              }
             }
           }
         }
