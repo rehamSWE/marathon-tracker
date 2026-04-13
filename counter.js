@@ -19,7 +19,10 @@ let noiseThreshold = 1;
 // ➕ إضافة فقط
 let started = false;
 
-// 🔊 صوت واحد فقط
+// 🔊 صوت الرسائل (جديد فقط)
+let messageSound = new Audio("sounds/1.mp3");
+
+// 🔊 صوت الهدف
 let goalSound = new Audio("sounds/goal.wav");
 
 // ➕ العبارات
@@ -56,7 +59,7 @@ let goalReached = false;
 // 🔥 أهم متغير (stage)
 let lastStage = 0;
 
-// 🔊 تشغيل الصوت
+// 🔊 تشغيل صوت الهدف
 function playGoalSound() {
   goalSound.currentTime = 0;
   goalSound.play().catch(()=>{});
@@ -142,7 +145,7 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        // 🔥 الحل المضمون (Stage)
+        // 🔥 Stage system
         let currentStage = Math.floor(steps / 50);
 
         if (currentStage > lastStage) {
@@ -156,7 +159,11 @@ function startCounting() {
           textEl.innerText = messages[index];
           textEl.classList.add("fade");
 
-          // 📳 اهتزاز قوي
+          // 🔊 صوت مع كل عبارة 🔥 (الإضافة المطلوبة)
+          messageSound.currentTime = 0;
+          messageSound.play().catch(()=>{});
+
+          // 📳 اهتزاز
           if (navigator.vibrate) {
             navigator.vibrate([200, 100, 200]);
           }
