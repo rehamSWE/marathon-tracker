@@ -25,7 +25,7 @@ let messageSound = new Audio("sounds/1.mp3");
 // 🔊 صوت الهدف
 let goalSound = new Audio("sounds/goal.wav");
 
-// 🔓 حل مشكلة الصوت (الإضافة المهمة فقط)
+// 🔓 حل مشكلة الصوت
 function unlockAudio() {
   messageSound.play().then(() => {
     messageSound.pause();
@@ -40,7 +40,6 @@ function unlockAudio() {
 
 // ➕ العبارات
 let messages = [
-
 "هدفنــا  مع كل خطوة .. بيئة أنقى وهواء أنظف  ",
 "هدفنــا بخطواتك .. نبني مجتمع أكثر نشاط ",
 "هدفنــا انتباهك .. يصنع فرق في سلامة الطريق ",
@@ -90,8 +89,11 @@ function handleAction() {
   let btn = document.getElementById("actionBtn");
 
   if (!started) {
-    unlockAudio(); // 🔥 هذا أهم تعديل
-    playGoalSound();
+
+    unlockAudio(); // 🔥 فتح الصوت أولاً
+    setTimeout(() => {
+      playGoalSound(); // 🔊 ثم تشغيله
+    }, 100);
 
     start();
     started = true;
@@ -172,11 +174,10 @@ function startCounting() {
           textEl.innerText = messages[index];
           textEl.classList.add("fade");
 
-          // 🔊 الصوت الآن بيشتغل صح 🔥
+          // 🔊 صوت الرسائل
           messageSound.currentTime = 0;
           messageSound.play().catch(()=>{});
 
-          // 📳 اهتزاز
           if (navigator.vibrate) {
             navigator.vibrate([200, 100, 200]);
           }
