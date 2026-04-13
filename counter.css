@@ -41,17 +41,16 @@ h2 {
   font-size: 1.4rem;
 }
 
-/* ✅ الكارد (تم إصلاحه بالكامل) */
+/* الكارد */
 .container {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
 
-  /* 🔥 الحل */
-  height: 38vh;              /* ثابت مثل الآيفون */
-  max-height: 42vh;          /* يمنع التمدد الزايد */
-  
+  height: 38vh;
+  max-height: 42vh;
+
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
 
@@ -62,7 +61,7 @@ h2 {
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* 🔥 يثبت العناصر */
+  justify-content: space-between;
 }
 
 /* العداد */
@@ -85,12 +84,11 @@ button {
 
   font-size: 14px;
 
-  margin: 10px auto; /* 🔥 تثبيت بالمركز */
+  margin: 10px auto;
 
   transition: 0.2s;
 }
 
-/* حالة الإنهاء */
 button[data-state="end"] {
   background: #e74c3c;
 }
@@ -107,7 +105,7 @@ button:active {
   transform: scale(0.95);
 }
 
-/* 🔥 النص */
+/* النص */
 #motivationText {
   font-size: 1.2rem;
   color: #2b5f56;
@@ -116,19 +114,23 @@ button:active {
   padding: 0 10px;
 
   display: -webkit-box;
-  -webkit-line-clamp: 2;   /* 🔥 سطرين فقط */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* 🔥 حل خاص للأندرويد فقط */
-@media (max-height: 700px) {
-  #motivationText {
-    font-size: 1rem; /* يصغر شوي */
-  }
+/* 🔥 الحل الصحيح: للأندرويد فقط */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (not (min-device-width: 768px)) {
+  @supports not (-webkit-touch-callout: none) {
+    
+    #motivationText {
+      font-size: 1rem;
+    }
 
-  .container {
-    height: 36vh;
+    .container {
+      height: 36vh;
+    }
+
   }
 }
 
