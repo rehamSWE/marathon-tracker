@@ -19,9 +19,6 @@ let noiseThreshold = 1;
 // ➕ إضافة فقط
 let started = false;
 
-// ❌ حذف صوت الخطوات
-// let stepSound = new Audio("sounds/1.mp3");
-
 // 🔊 صوت واحد فقط
 let goalSound = new Audio("sounds/goal.wav");
 
@@ -55,9 +52,11 @@ let messages = [
 ];
 
 let goalReached = false;
-let lastMessageIndex = -1;
 
-// 🔥 تشغيل الصوت (مرة واحدة فقط)
+// 🔥 أهم متغير (stage)
+let lastStage = 0;
+
+// 🔊 تشغيل الصوت
 function playGoalSound() {
   goalSound.currentTime = 0;
   goalSound.play().catch(()=>{});
@@ -75,7 +74,7 @@ function handleAction() {
   let btn = document.getElementById("actionBtn");
 
   if (!started) {
-    playGoalSound(); // 🔊 عند البدء فقط
+    playGoalSound(); // 🔊 عند البدء
 
     start();
     started = true;
@@ -143,33 +142,34 @@ function startCounting() {
 
         let textEl = document.getElementById("motivationText");
 
-        if (steps >= 50 && steps % 50 === 0) {
+        // 🔥 الحل المضمون (Stage)
+        let currentStage = Math.floor(steps / 50);
 
-          let index = Math.floor(steps / 50) - 1;
-          index = index % messages.length;
+        if (currentStage > lastStage) {
+          lastStage = currentStage;
 
-          if (index !== lastMessageIndex) {
-            lastMessageIndex = index;
+          let index = (currentStage - 1) % messages.length;
+          if (index < 0) index = 0;
 
-            textEl.classList.remove("fade");
-            void textEl.offsetWidth;
-            textEl.innerText = messages[index];
-            textEl.classList.add("fade");
+          textEl.classList.remove("fade");
+          void textEl.offsetWidth;
+          textEl.innerText = messages[index];
+          textEl.classList.add("fade");
 
-            // 📳 اهتزاز فقط
-            if (navigator.vibrate) {
-              navigator.vibrate([200, 100, 200]);
-            }
+          // 📳 اهتزاز قوي
+          if (navigator.vibrate) {
+            navigator.vibrate([200, 100, 200]);
           }
         }
 
+        // 🎯 الهدف
         if (steps >= 1500 && !goalReached) {
           goalReached = true;
 
-          playGoalSound(); // 🔊 عند الهدف فقط
+          playGoalSound();
 
           if (navigator.vibrate) {
-            navigator.vibrate([200, 100, 200]);
+            navigator.vibrate([300, 100, 300]);
           }
 
           showGoalPopup();
