@@ -66,3 +66,25 @@ p {
   font-size: 1.2rem;
   color: #2b5f56;
 }
+
+/* ✅ الشعارات (تم إصلاحها هنا فقط) */
+.logos {
+  position: fixed; /* 🔥 بدل absolute */
+  bottom: 12px;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  z-index: 2;
+
+}
+
+.logos img {
+  width: 85px; /* 👈 صغرناها شوي */
+  height: auto;
+  opacity: 0.9;
+}
