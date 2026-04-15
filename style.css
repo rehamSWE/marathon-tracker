@@ -120,7 +120,7 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 7px;
+  gap: 4px;
 
   z-index: 2;
 }
