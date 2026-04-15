@@ -111,22 +111,22 @@ button:active {
 
 /* ✅ الشعارات (تم إصلاحها هنا فقط) */
 .logos {
-  position: fixed; /* 🔥 بدل absolute */
+  position: fixed;
   bottom: 12px;
   left: 0;
   width: 100%;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* 🔥 بدل center */
   align-items: center;
-  gap: 10px;
+
+  padding: 0 15px; /* ✨ عشان ما يلصقون بالحواف */
 
   z-index: 2;
-
 }
 
 .logos img {
-  width: 85px; /* 👈 صغرناها شوي */
+  width: 85px;
   height: auto;
   opacity: 0.9;
 }
